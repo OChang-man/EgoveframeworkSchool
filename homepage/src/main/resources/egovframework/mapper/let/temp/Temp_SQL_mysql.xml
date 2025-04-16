@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="tempDAO">
+
+	<resultMap id="temp" type="egovframework.let.temp.service.TempVO" > <!--DB와 연결되는 부분-->
+		<result property="tempId" column="TEMP_ID"/>
+		<result property="tempVal" column="TEMP_VAL"/>
+	</resultMap>
+	
+	<select id="tempDAO.selectTemp" resultMap="temp"> <!--DAO와 연결되는 부분-->
+		select TEMP_ID, TEMP_VAL
+		from lettemp
+		where TEMP_ID = #{tempId}
+	</select>
+	
+	<select id="tempDAO.selectTempList" resultType="egovMap"> <!--DAO와 연결되는 부분-->
+		select TEMP_ID, TEMP_VAL
+		from lettemp
+		ORDER BY TEMP_ID
+		LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+	</select>
+	
+	<select id="tempDAO.selectTempListCnt" resultType="java.lang.Integer">
+		select COUNT(*) CNT
+		from lettemp
+	</select>
+	
+	<insert id="tempDAO.insertTemp" parameterType="egovframework.let.temp.service.TempVO">
+		INSERT INTO lettemp(
+			TEMP_VAL
+			) VALUES (
+				#{tempVal}
+				)
+	</insert>
+	<update id="tempDAO.updateTemp" parameterType="egovframework.let.temp.service.TempVO">
+		UPDATE lettemp SET
+			TEMP_VAL = #{tempVal}
+			WhERE TEMP_ID = #{tempId}
+	</update>
+	
+	<delete id="tempDAO.deleteTemp" parameterType="egovframework.let.temp.service.TempVO">
+		DELETE FROM lettemp
+		WHERE TEMP_ID =#{tempId}
+	</delete>
+</mapper>
