@@ -1,0 +1,25 @@
+package egovframework.let.board.service.impl;
+
+import java.util.List;
+
+import org.egovframe.rte.psl.dataaccess.EgovAbstractMapper;
+import org.egovframe.rte.psl.dataaccess.util.EgovMap;
+import org.springframework.stereotype.Repository;
+
+import egovframework.let.board.service.BoardVO;
+import egovframework.let.temp.service.TempVO;
+import egovframework.let.temp2.service.Temp2VO;
+
+@Repository("boardDAO")
+public class BoardDAO extends EgovAbstractMapper{
+	
+	//게시물 목록 가져오기
+	public List<EgovMap> selectBoardList(BoardVO vo) throws Exception {
+  		return selectList("boardDAO.selectBoardList", vo);
+  	}
+	
+	//게시물 목록 수
+    public int selectBoardListCnt(BoardVO vo) throws Exception {
+    	return selectOne("boardDAO.selectBoardListCnt", vo);
+    }
+}
