@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -169,6 +170,85 @@
 				<c:if test="${fn:endsWith(String, 'MSJ')}">
 					<p>String ends with MSJ</p>
 				</c:if>
+			</li>
+		</c:when>
+		<c:when test="${step eq '13'}">
+			<li>
+				<h3>fn:split() : 주어진 문자열을 특정 문자로 구분해서 배열로 분할</h3>
+				
+				<c:set var="str" value="1,2,3,4,5,6"/>
+				<c:set var="strSplit" value="${fn:split(str,',')}"/>
+				<c:forEach var="result" items="${strSplit}">
+					<c:out value="${result}"/><br/>
+				</c:forEach>
+			</li>
+		</c:when>
+		<c:when test="${step eq '14'}">
+			<li>
+				<h3>fn:length() : 문자열 내부의 문자 수 또는 컬렉션의 항목 수를 반환</h3>
+				
+				<c:set var="str1" value="This is first string"/>
+				<c:set var="str" value="1,2,3,4,5,6"/>
+				<c:set var="strSplit" value="${fn:split(str,',')}"/>
+				Length of the String-1 is : <c:out value="${fn:length(str1)}"/><br>
+				Length of the String-2 is : <c:out value="${fn:length(strSplit)}"/>
+			</li>
+		</c:when>
+		<c:when test="${step eq '15'}">
+			<li>
+				<h3>fn:toLowerCase() : 문자열의 모든 문자를 소문자로 변환[확장자 확인할때 이용되기도 함]</h3>
+				
+				<c:set var="string" value="Welcom to MSJ calss"/>
+				<c:out value="${fn:toLowerCase(string)}" />
+			</li>
+		</c:when>
+		<c:when test="${step eq '16'}">
+			<li>
+				<h3>fn:toUpperCase() : 문자열의 모든 문자를 대문자로 변환</h3>
+				
+				<c:set var="string" value="Welcom to MSJ calss"/>
+				<c:out value="${fn:toUpperCase(string)}" />
+			</li>
+		</c:when>
+		<c:when test="${step eq '17'}">
+			<li>
+				<h3>fn:substring() : 주어진 시작 및 끝 위치에 따라 문자열의 하위 집합을 반환[날짜자료에서 많이 쓰임]</h3>
+				
+				<c:set var="string" value="YYYY-01-01"/>
+				<c:out value="${fn:substring(string, 0, 4)}" /><br>
+				<c:out value="${fn:substring(string, 5, 7)}" />
+			</li>
+		</c:when>
+		<c:when test="${step eq '18'}">
+			<li>
+				<h3>fn:replace() : 모든 문자열을 다느 문자열 시퀀스로 바꿈</h3>
+				
+				<c:set var="string" value="YYYY-01-01"/>
+				<c:out value="${fn:replace(string, '-', '.')}" />
+			</li>
+		</c:when>
+		<c:when test="${step eq '19'}">
+			<li>
+				<h3>fn:trim() : 문자열의 양쪽 끝에서 공백을 제거(문자열 사이의 공백은 사라지지 않음)[관리자페이지의 input에서 많이 사용함]</h3>
+				
+				<c:set var="str1" value="         Welcome to MSJ class        "/>
+				<P>String-1 Length is : ${fn:length(str1)}</P>
+				
+				<c:set var="str2" value="${fn:trim(str1)}"/>
+				<P>String-2 Length is : ${fn:length(str2)}</P>
+				<P>Final value fo string is : ${str2}</P>
+			</li>
+		</c:when>
+		
+<%--										 FormatDate Tag [fmt: ]											 --%>	
+	
+	<c:when test="${step eq '20'}">
+			<li>
+				<h3>fmt:formatDate : 제공된 패터 및 스타일을 사용하여 시간 및 날짜를 형식화함</h3>
+				
+				<c:set var="Date" value="<%=new java.util.Date()%>"/>
+				${Date}<br/>
+				<fmt:formatDate value="${Date}" pattern="YYYY-MM-dd"/>
 			</li>
 		</c:when>
 	</c:choose>
